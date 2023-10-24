@@ -1,0 +1,31 @@
+{
+  "name": "nft-contracts",
+  "version": "1.0.0",
+  "description": "Folia presents NFT Smalley",
+  "license": "CC-BY-NC-4.0",
+  "author": "Billy Rennekamp (@okwme)",
+  "main": "index.js",
+  "scripts": {
+    "chain": "ganache-cli -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat'",
+    "deploy": "hardhat run scripts/deploy.js",
+    "test": "hardhat test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "*",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@nomiclabs/hardhat-ganache": "*",
+    "@nomiclabs/hardhat-waffle": "*",
+    "@openzeppelin/contracts": "^4.6.0",
+    "base64-sol": "*",
+    "chai": "*",
+    "dotenv": "^16.0.1",
+    "erc721a": "^4.2.3",
+    "ethereum-waffle": "*",
+    "ethers": "^5.7.0",
+    "hardhat": "*",
+    "hardhat-contract-sizer": "*",
+    "hardhat-gas-reporter": "*",
+    "merkletreejs": "^0.3.10"
+  }
+}
