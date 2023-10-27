@@ -62,7 +62,7 @@ module.exports = {
     sepolia: {
       url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_API_KEY,
       accounts: { mnemonic: process.env.deploymentKey },
-      gasPrice: 15_000_000_000, // 15 GWEI
+      gasPrice: 50_000_000_000, // 50 GWEI
     },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY,

@@ -13,28 +13,31 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 
-NFT
-By NFT Smalley
+Coordinates
+By Travess Smalley
 Presented by Folia.app
 */
 
-/// @title NFT
-/// @notice https://nft.folia.app
+/// @title Coordinates
+/// @notice https://coordinates.folia.app
 /// @author @okwme
-/// @dev ERC721A contract for NFT. External upgradeable metadata.
+/// @dev ERC721A contract for Coordinates. External upgradeable metadata.
 
-contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
+contract Coordinates is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     bool public paused = false;
-    uint256 public constant MAX_SUPPLY = 128;
-    uint256 public price = 0.02 ether;
+    uint256 public constant MAX_SUPPLY = 139;
+    uint256 public price = 0.024 ether; // TODO: change before mainnet
     address public metadata;
     address public splitter;
-    // uint256 public startdate = 1698343200; // Thu Oct 26 2023 18:00:00 GMT+0000 (8pm CEST Berlin, 7pm London, 2pm NYC, 11am LA)
-    // uint256 public premint = 1698256800; // Wed Oct 25 2023 18:00:00 GMT+0000 (8pm CEST Berlin, 4pm London, 11am NYC, 8am LA)
-    uint256 public startdate = block.timestamp; // TODO: remove before main
-    uint256 public premint = block.timestamp; // TODO: remove before main
+    // uint256 public startdate = 1698822000; // Wed Nov 01 2023 07:00:00 GMT+0000 (8pm CEST Berlin, 7pm London, 2pm NYC, 11am LA)
+    // uint256 public premint = 1698735600; // Tue Oct 31 2023 07:00:00 GMT+0000 (8pm CEST Berlin, 4pm London, 11am NYC, 8am LA)
+    uint256 public startdate = block.timestamp; // TODO: remove before mainnet
+    uint256 public premint = block.timestamp; // TODO: remove before mainnet
     bytes32 public merkleRoot =
-        0xf78f6412ef155d654600b79b83071b194c4c94f1212bb3feea35d4a290c3d0c9;
+        0x7eb11619d1dd456844424b6c6f1be20ba3552298bb97a978724278ddebbd4474;
+
+    uint256 public constant MAX_PER_PREMINT = 2;
+    mapping(address => uint256) public preminted;
 
     event EthMoved(
         address indexed to,
@@ -43,10 +46,13 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
         uint256 amount
     );
 
-    constructor(address metadata_, address splitter_) ERC721A("NFT", "NFT") {
+    constructor(
+        address metadata_,
+        address splitter_
+    ) ERC721A("Coordinates", "CRD") {
         metadata = metadata_;
         splitter = splitter_; // splitter doesn't need to be checked because it's checked in _setDefaultRoyalty
-        _setDefaultRoyalty(splitter, 1000); // 10%
+        _setDefaultRoyalty(splitter, 750); // 7.5%
     }
 
     /// @dev Allows minting by sending directly to the contract.
@@ -72,8 +78,8 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     }
 
     /// @dev overwrites the tokenURI function from ERC721
-    /// @param id the id of the NFT
-    /// @return string the URI of the NFT
+    /// @param id the id of the Coordinates
+    /// @return string the URI of the Coordinates
     function tokenURI(
         uint256 id
     ) public view override(ERC721A, IERC721A) returns (string memory) {
@@ -108,6 +114,11 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
             "You are not on the allowlist"
         );
         require(!paused && block.timestamp >= premint, "Premint not started");
+        require(
+            preminted[msg.sender] + quantity <= MAX_PER_PREMINT,
+            "You can only mint 2 per premint"
+        );
+        preminted[msg.sender] += quantity;
         internalMint(msg.sender, quantity);
     }
 
@@ -129,7 +140,7 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     }
 
     /// @dev mint tokens with rcipient and quantity as parameters
-    /// @param recipient the recipient of the NFT
+    /// @param recipient the recipient of the Coordinates
     /// @param quantity the quantity of tokens to mint
     function mint(address recipient, uint256 quantity) public payable {
         require(!paused && block.timestamp >= startdate, "PAUSED");
@@ -137,17 +148,14 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     }
 
     /// @dev mint tokens with rcipient and quantity as parameters
-    /// @param recipient the recipient of the NFT
+    /// @param recipient the recipient of the Coordinates
     /// @param quantity the quantity of tokens to mint
     function internalMint(
         address recipient,
         uint256 quantity
     ) internal nonReentrant {
         require(msg.value >= price * quantity, "WRONG PRICE");
-        require(
-            quantity == 1 || quantity == 3 || quantity == 5,
-            "CAN'T MINT BESIDES QUANTITY OF 1, 3 OR 5"
-        );
+        require(quantity <= 5, "CAN'T MINT MORE THAN 5 AT A TIME");
         if (totalSupply() + quantity > MAX_SUPPLY) {
             quantity = MAX_SUPPLY - totalSupply(); // This will throw an error if the amount is negative
             if (quantity == 0) {
@@ -168,7 +176,7 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     }
 
     /// @dev only the owner can mint without paying
-    /// @param recipient the recipient of the NFT
+    /// @param recipient the recipient of the Coordinates
     /// @param quantity the quantity of tokens to mint
     function adminMint(
         address recipient,
@@ -194,7 +202,7 @@ contract NFT is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     }
 
     /// @dev only the owner can set the price
-    /// @param price_ the price of the NFT
+    /// @param price_ the price of the Coordinates
     function setPrice(uint256 price_) public onlyOwner {
         price = price_;
     }

@@ -1,19 +1,21 @@
-const { initContracts, merkleAddresses } = require("./utils");
+const { initContracts } = require("./utils");
+const merkleAddresses = require('../merkleAddresses.js')
 const { ethers } = require('ethers')
 const { MerkleTree } = require('merkletreejs')
 
 async function main() {
   const [owner, addr1] = await hre.ethers.getSigners();
   const billy = '0xFa398d672936Dcf428116F687244034961545D91'
-  const { nft } = await initContracts();
+  const { coordinates } = await initContracts();
 
-  // const realTree = new MerkleTree(
-  //   merkleAddresses.map(ethers.utils.keccak256),
-  //   ethers.utils.keccak256,
-  //   { sortPairs: true },
-  // );
-  // const realTreeRoot = "0x" + realTree.getRoot().toString('hex')
-
+  const realTree = new MerkleTree(
+    merkleAddresses.map(ethers.utils.keccak256),
+    ethers.utils.keccak256,
+    { sortPairs: true },
+  );
+  const realTreeRoot = "0x" + realTree.getRoot().toString('hex')
+  console.log({ realTreeRoot })
+  return
   const addresses = [owner.address, addr1.address, billy]
   console.log({ addresses })
   return
@@ -25,7 +27,7 @@ async function main() {
   const fakeTreeRoot = "0x" + fakeTree.getRoot().toString('hex')
 
 
-  await nft.setMerkleRoot(fakeTreeRoot)
+  await coordinates.setMerkleRoot(fakeTreeRoot)
 
 }
 

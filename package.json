@@ -1,12 +1,13 @@
 {
-  "name": "nft-contracts",
+  "name": "coordinates-contracts",
   "version": "1.0.0",
-  "description": "Folia presents NFT Smalley",
+  "description": "Folia presents Coordinates",
   "license": "CC-BY-NC-4.0",
   "author": "Billy Rennekamp (@okwme)",
   "main": "index.js",
   "scripts": {
     "chain": "ganache-cli -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat'",
+    "verify": "hardhat verify",
     "deploy": "hardhat run scripts/deploy.js",
     "test": "hardhat test"
   },

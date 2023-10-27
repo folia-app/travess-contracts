@@ -1,7 +1,7 @@
 
-const NFTABI = require("./contractMetadata/ABI-sepolia-NFT.json");
-const NFT = require("./contractMetadata/sepolia-NFT.json"); // TODO: replace with mainnet
-const NFTSepolia = require("./contractMetadata/sepolia-NFT.json");
+const CoordinatesABI = require("./contractMetadata/ABI-sepolia-Coordinates.json");
+const Coordinates = require("./contractMetadata/sepolia-Coordinates.json"); // TODO: replace with mainnet
+const CoordinatesSepolia = require("./contractMetadata/sepolia-Coordinates.json");
 
 const MetadataABI = require("./contractMetadata/ABI-sepolia-Metadata.json");
 const Metadata = require("./contractMetadata/sepolia-Metadata.json"); // TODO: replace with mainnet
@@ -11,14 +11,14 @@ const { merkleAddresses } = require("./merkleAddresses.js");
 
 module.exports = {
   merkleAddresses,
-  NFT: {
-    abi: NFTABI.abi,
+  Coordinates: {
+    abi: CoordinatesABI.abi,
     networks: {
-      '1': NFT,
-      'homestead': NFT,
-      'mainnet': NFT,
-      '11155111': NFTSepolia,
-      'sepolia': NFTSepolia,
+      '1': Coordinates,
+      'homestead': Coordinates,
+      'mainnet': Coordinates,
+      '11155111': CoordinatesSepolia,
+      'sepolia': CoordinatesSepolia,
     },
   },
   Metadata: {

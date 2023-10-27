@@ -1,11 +1,11 @@
 const { initContracts, decodeUri } = require("./utils");
 
 async function main() {
-  const { nft } = await initContracts();
+  const { coordinates } = await initContracts();
 
   const tokenID = 1;
 
-  const metadata = await nft.tokenURI(tokenID);
+  const metadata = await coordinates.tokenURI(tokenID);
   const metaWithoutDataURL = decodeUri(metadata);
   const obj1 = JSON.parse(metaWithoutDataURL);
   console.log(obj1);

@@ -4,8 +4,8 @@ const { initContracts } = require("./utils");
 //npx hardhat run --network localhost scripts/Unpause.js
 
 async function main() {
-  const { nft } = await initContracts();
-  await nft.setPause(false);
+  const { coordinates } = await initContracts();
+  await coordinates.setPause(false);
 }
 
 main()

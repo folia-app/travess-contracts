@@ -29,6 +29,7 @@ async function copyContractABI(a, b) {
 
 async function copyABI(name) {
   var networkinfo = await hre.ethers.provider.getNetwork();
+  console.log({ networkinfo })
   console.log(`--copy ${name} ABI`);
   var pathname = path.join(
     __dirname,
@@ -67,11 +68,12 @@ async function saveAddress(contract, name) {
 
 async function main() {
   console.log("Deploy to chain:");
-  console.log(await hre.ethers.provider.getNetwork());
-  const { nft, metadata } = await deployContracts();
-  await copyABI("NFT");
+  const network = await hre.ethers.provider.getNetwork()
+  console.log({ network })
+  const { coordinates, metadata } = await deployContracts();
+  await copyABI("Coordinates");
   await copyABI("Metadata");
-  await saveAddress(nft, "NFT");
+  await saveAddress(coordinates, "Coordinates");
   await saveAddress(metadata, "Metadata");
 }
 

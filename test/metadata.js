@@ -13,13 +13,13 @@ describe("Metadata Tests", function () {
   this.timeout(50000000);
 
   it("Confirm tokenURI returns combined baseURI and tokenId", async function () {
-    const { nft, metadata } = await deployContracts();
+    const { coordinates, metadata } = await deployContracts();
     const tokenIds = [1, 100, 1010]
     for (let i = 0; i < tokenIds.length; i++) {
       const tokenId = tokenIds[i]
       const baseURI = await metadata.baseURI();
-      const expectedURI = baseURI + tokenId.toString()
-      const tokenURI = await nft.tokenURI(tokenId);
+      const expectedURI = baseURI + tokenId.toString() + ".json"
+      const tokenURI = await coordinates.tokenURI(tokenId);
       expect(expectedURI).to.equal(tokenURI);
     }
   });

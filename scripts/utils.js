@@ -4,9 +4,9 @@ const hre = require("hardhat");
 const path = require("node:path");
 const fs = require("fs").promises;
 
-const correctPrice = ethers.utils.parseEther("0.055555555555555555");
-const splitterAddress = '0x69Bff8f9292e3D2b436A66D9F2226986aB16ABCF'
-const maxSupply = 128;
+const correctPrice = ethers.utils.parseEther("0.024"); // TODO: change for mainnet
+const splitterAddress = '0x2F5866D7215416Fa60beDF532856736Cd9a76acf' // TODO: change for mainnet
+const maxSupply = 139;
 
 const testJson = (tJson) => {
   try {
@@ -51,15 +51,15 @@ const getPathAddress = async (name) => {
 const initContracts = async () => {
   const [owner] = await hre.ethers.getSigners();
 
-  const addressNFT = JSON.parse(await readData(await getPathAddress("NFT")))["address"];
-  const ABINFT = JSON.parse(await readData(await getPathABI("NFT")))["abi"];
-  let nft = new ethers.Contract(addressNFT, ABINFT, owner);
+  const addressCoordinates = JSON.parse(await readData(await getPathAddress("Coordinates")))["address"];
+  const ABICoordinates = JSON.parse(await readData(await getPathABI("Coordinates")))["abi"];
+  let coordinates = new ethers.Contract(addressCoordinates, ABICoordinates, owner);
 
   const addressMetadata = JSON.parse(await readData(await getPathAddress("Metadata")))["address"];
   const ABIMetadata = JSON.parse(await readData(await getPathABI("Metadata")))["abi"];
   let metadata = new ethers.Contract(addressMetadata, ABIMetadata, owner);
 
-  return { nft, metadata };
+  return { coordinates, metadata };
 };
 
 
@@ -87,18 +87,18 @@ const deployContracts = async () => {
   var metadataAddress = metadata.address;
   log("Metadata Deployed at " + String(metadataAddress));
 
-  // deploy NFT
-  const NFT = await ethers.getContractFactory("NFT");
-  const nft = await NFT.deploy(metadataAddress, splitterAddress);
-  await nft.deployed();
-  var nftAddress = nft.address;
-  log("NFT Deployed at " + String(nftAddress) + ` with metadata ${metadataAddress} and splitter ${splitterAddress}`);
+  // deploy Coordinates
+  const Coordinates = await ethers.getContractFactory("Coordinates");
+  const coordinates = await Coordinates.deploy(metadataAddress, splitterAddress);
+  await coordinates.deployed();
+  var coordinatesAddress = coordinates.address;
+  log("Coordinates Deployed at " + String(coordinatesAddress) + ` with metadata ${metadataAddress} and splitter ${splitterAddress}`);
 
   let reEntry
   // deploy reEntry contract for testing
   if (networkinfo["chainId"] == 12345) {
     const ReEntry = await ethers.getContractFactory("ReEntry");
-    reEntry = await ReEntry.deploy(nftAddress);
+    reEntry = await ReEntry.deploy(coordinatesAddress);
     await reEntry.deployed();
     // var reEntryAddress = reEntry.address;
   }
@@ -108,7 +108,7 @@ const deployContracts = async () => {
   if (networkinfo["chainId"] == 5 || networkinfo["chainId"] == 1 || networkinfo["chainId"] == 11155111) {
     if (blocksToWaitBeforeVerify > 0) {
       log(`Waiting for ${blocksToWaitBeforeVerify} blocks before verifying`)
-      await nft.deployTransaction.wait(blocksToWaitBeforeVerify);
+      await coordinates.deployTransaction.wait(blocksToWaitBeforeVerify);
     }
 
     log("Verifying Metadata Contract");
@@ -122,11 +122,11 @@ const deployContracts = async () => {
     }
 
     // log(`Waiting for ${blocksToWaitBeforeVerify} blocks before verifying`)
-    await nft.deployTransaction.wait(blocksToWaitBeforeVerify);
-    log("Verifying NFT Contract");
+    await coordinates.deployTransaction.wait(blocksToWaitBeforeVerify);
+    log("Verifying Coordinates Contract");
     try {
       await hre.run("verify:verify", {
-        address: nftAddress,
+        address: coordinatesAddress,
         constructorArguments: [metadataAddress, splitterAddress],
       });
     } catch (e) {
@@ -135,7 +135,7 @@ const deployContracts = async () => {
 
   }
 
-  return { nft, metadata, reEntry };
+  return { coordinates, metadata, reEntry };
 };
 
 const log = (message) => {

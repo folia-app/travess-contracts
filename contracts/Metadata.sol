@@ -4,17 +4,19 @@ pragma solidity ^0.8.0;
 // import "base64-sol/base64.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./NFT.sol";
+import "./Coordinates.sol";
 
-/// @title NFT Metadata
-/// @notice https://nft.folia.app
+/// @title Coordinates Metadata
+/// @notice https://coordinates.folia.app
 /// @author @okwme
-/// @dev The updateable and replaceable metadata contract for NFT
+/// @dev The updateable and replaceable metadata contract for Coordinates
 
 contract Metadata is Ownable {
     constructor() {}
 
-    string public baseURI = "https://nft.folia.app/v1/metadata/";
+    // TODO: change before mainnet
+    string public baseURI =
+        "ipfs://QmSisoUUyN8YR1JsciX7MSfPkXHfMVwDS3TYGYmKbDB9tT/";
 
     /// @dev sets the baseURI can only be called by the owner
     /// @param baseURI_ the new baseURI
@@ -26,6 +28,9 @@ contract Metadata is Ownable {
     /// @param tokenId the tokenId
     /// @return _ the metadata
     function getMetadata(uint256 tokenId) public view returns (string memory) {
-        return string(abi.encodePacked(baseURI, Strings.toString(tokenId)));
+        return
+            string(
+                abi.encodePacked(baseURI, Strings.toString(tokenId), ".json")
+            );
     }
 }
