@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-// import "base64-sol/base64.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./Coordinates.sol";
@@ -14,9 +13,8 @@ import "./Coordinates.sol";
 contract Metadata is Ownable {
     constructor() {}
 
-    // TODO: change before mainnet
     string public baseURI =
-        "ipfs://QmSisoUUyN8YR1JsciX7MSfPkXHfMVwDS3TYGYmKbDB9tT/";
+        "ipfs://QmNgDSXzx28jWmtVBS1MDMgboMGULjhdtL1gDWFJu8FSmC/";
 
     /// @dev sets the baseURI can only be called by the owner
     /// @param baseURI_ the new baseURI

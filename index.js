@@ -1,10 +1,10 @@
 
 const CoordinatesABI = require("./contractMetadata/ABI-sepolia-Coordinates.json");
-const Coordinates = require("./contractMetadata/sepolia-Coordinates.json"); // TODO: replace with mainnet
+const Coordinates = require("./contractMetadata/homestead-Coordinates.json");
 const CoordinatesSepolia = require("./contractMetadata/sepolia-Coordinates.json");
 
 const MetadataABI = require("./contractMetadata/ABI-sepolia-Metadata.json");
-const Metadata = require("./contractMetadata/sepolia-Metadata.json"); // TODO: replace with mainnet
+const Metadata = require("./contractMetadata/homestead-Metadata.json");
 const MetadataSepolia = require("./contractMetadata/sepolia-Metadata.json");
 
 const { merkleAddresses } = require("./merkleAddresses.js");

@@ -11,6 +11,44 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /*
 ----------------------------------------------------------------------------------------------------
+▎▋▚█▘█▞▓▜█▆█▃▃░░▛░▜▖▐█▙▌▊▞░▗▒▊▕▁▖▌▇▎▕▅▁▐▌▅▖▐█▆▞▁▖▛▖▅▁
+▋▊▀▃▝▊▖▜▁▂▃▍▖▉▌▃▔▒▙▃▘▟▁▘▓▚▍▘▜▚▇▅▅▇▆▀▓▚▜▒▝▟▝░▆▉▔▚▙▊▛▎▉
+▛▓▒▓▌▌▛▓▐▀▗▐░▒▉▂▌█▝▝▍▆▎▇▝▙▁▌▀▜▓▛▎▅▌▜▐▇▌▝▅▃▌▗▕▖▗▟▜▕▜▉▛
+▙▟░▃▀▌▔▙▙▗▅▓▆▊▟▃░▁▍▅▔▁▜▔▞░▍▅▊▗▕▁▖▅▄▔▐▘▋▉▐░▜▔▚▚▘█▙▃▍▌▅
+▁▙▌▄▃▁▘▄▕▝▆▇▋▞▓▕▋▃▎▀▛▆▖▃▟▙░▌▜▙█▛▒▕▀▕▔▘▗▉▓▝░▞▙▃░▅▄▀▅▀▆
+▙▋▇▒▉▙▇▛▌▒▍▀▛▄▇▒▟▖█▘▗▘▒▚▘▀▘▒▙▀▋▉▎▘▓▒▝▋░▁▗▎▒▚▙▗▄▒▊▍▒▂▅
+▐▗▀▘▍▌▘▒▙▘▒▊░▆▛▛░▜▒▗▔▒▎▓▚▒▃▌▋▄▒▛▛▐▒▉▜▒▔▓▝▁▝▋█▖▄▗▒▅▍▄▕
+▘▙▚▜█▓▖▘▂▝▒▇░▄▅░▟▎▗▕▔▍▅▗▙▇▉▔▜▖▀▓▌▘▌▕█▂▊▋▟▚▓▎▞▖▟▛▅▖▍▗▁
+▘▕▌▕▊▌▅▗▂▒▉▊▕▒▔▒▋▇▀▇▛▝▂▞░▍▓▒▁▞▊▗▓▗▉▛▁▎▐▃▁▙▋▔▊▀▅▔▅▄▛▀▟
+▉▐▀█▎▊▟▟▟▉▛▀▖█▁▗▀▋██▋▎▝▎░▘▌▐▔▉▞▝▚▟▅▆▉▄▅▇▋▞▇▂▇▇▗▇▓▀▐▜▌
+▒▒▒░░░░░░░░░░▒░░░▒░░░░░░▒░░░░░░▒░░░░░▒▒░░▒░░░░░░░░▒▒▒
+▒░░░░█▀▀░█▀█░█▀█░█▀▄░█▀▄░▀█▀░█▀█░█▀█░▀█▀░█▀▀░█▀▀░░▒░▒
+▒░▒░░█░░░█░█░█░█░█▀▄░█░█░░█░░█░█░█▀█░░█░░█▀▀░▀▀█░░░░▒
+▒▒░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░░░░▒
+▒░▒▒░░░░░░░░░▒░░░░░▒░░░█▀▄░█░█░░░░░░░░░░▒▒░░▒░░░░░░▒▒
+▒░░░░░▒░░░░░▒░░░▒░▒░░░░█▀▄░░█░░░░░░░▒░░▒░░░░▒░░░▒░░░▒
+▒▒░▒░░░░▒▒░░░░░░░░░░░░░▀▀░░░▀░░░░░░░░░░░░▒░░░░░░░░▒▒▒
+▒░░░░░░░░░▒░░▀█▀░█▀▄░█▀█░█░█░█▀▀░█▀▀░█▀▀░░░░░░░▒░▒░░▒
+▒▒░░░░░▒░░░░░░█░░█▀▄░█▀█░▀▄▀░█▀▀░▀▀█░▀▀█░░░░░▒░░░░░░▒
+▒░░▒░░░░░░░░░░▀░░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀▀▀░░░░░░░░░░░▒▒
+▒░▒░▒░░▒░▒░░░█▀▀░█▄█░█▀█░█░░░█░░░█▀▀░█░█░░░░░░░░▒░░▒▒
+▒░░░░░░░░░░░░▀▀█░█░█░█▀█░█░░░█░░░█▀▀░░█░░░░░▒░░░░░▒▒▒
+▒▒▒░░░░░▒░░░░▀▀▀░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░▀░░░░░░░░░░░░░▒
+▒░░░░░░░░░░░░░░░░░░▀▀▄░▄▀▄░▀▀▄░▀▀█░░░░░░░░▒░░░░░░▒░░▒
+▒▒░░░▒░░░░▒░░░░░▒░░▄▀░░█/█░▄▀░░░▀▄░▒░░░░░░░░░░░▒░░▒░▒
+▒▒▒▒░░░░▒░░░░░░░▒▒░▀▀▀░░▀░░▀▀▀░▀▀░░░░░░░░░░▒▒░░░░░░▒▒
+▒▒▒░░▒░░░░░░░░░░▒░░░░░░░░░▒░░▒░░░░░▒░░░░░░░░░░▒░░░▒░▒
+▃▕▊▕▟▉▒▗█▗▝▐▙▀▗▃▝▝▃▄▂▚▉▓▘▗▎▄▂▕▟▃▉▊▘▆▔▉▝▚▞▘▉▕▙▟▖▖▚▙▘▜▒
+▖▛▌▖▐▋▗▗▔▎▞▇▖▛▟▒▔▇▅▊▆▛▀▀▓▘▚▂▕▆▉█▁▖▟▎▀▖▅▔▃▃▚▙▝▙▉░▀▎▛▄▇
+▎▜▚▃▂▄▋▁▘█▐▖▝▔▊▀▗▄▗▔▛▀▂▜▌▛▀▓▔▃▊▀▝▃▃▀▅▍▟▝▖▍▔▓▁▜░▘▞█▊▙▆
+▆▔▄▘▕▌▙▒▐▜▐▕▇▐░▞▝▄▎▞▞▀▔▜▆▜▕▊▇█▜▍▜▞▅░▋▞▂▛▙░▎▀▀▟▜▛▁▉▗▟▉
+▅▍▖▌▖░▚▒▎▟▂▘▜▃▔▕▒▂▓▒▟▐▊▀▙▁▟▀▉▘▋▎▅▟▛▜▐▓▋▟░▌▗▌▐█▟▁█▐░▇▝
+▘▄▔▁▜▝▎▀▝▇▜▌▙▇▉▉▔▟▖▁▅▓▀▎▂▎▔▀▇▚▔▟▜▆▟▗▁▍▗▜▓░▉▋▘░▕▊▐█▋▔▙
+▙▔▚▁▋▋▀▆▐▟▝▐▊▒▋▞▂▕▇▚▄▛▂▒▃▎▅▛▗▅▕▐▘▎░▃▘▒▇▆▎▄▖▚▖▁▖▖▕▛░▙▖
+▝▎▕▔▔▉▄▋▖▕▍▋▄▕▐▔▘▅▋▋▇▟▂▚▚░▓░▁▛█▟▉▛▓▞▂▗▇▖▌▕▁░█▒▂▀▕▋▋▚▊
+▞▄▒▀▀▚▝▇▓▐▅▕▇▋▊▒▞▉▀▆▙▃▄▎▌░▆▖▜▛▙▙▟▊▗▝▂▔▅▕▃█▉█▔▒▚▓▛▛▗▓▜
+▌▅▜▆▀▕▟▞▝▔▛▟▇▀▒▉▇▛▒▛▊▊▋▆▃▃▙▝▝▖▃▉▛▀▍▜▓▋▘▎▟▓▍▅▒▞▌▗▗▜▐▂▆
+▝▝▄▚▓█▁▍▆▌▇▙▘▟▇▖░▔▛▀▒▇▗▆▁▄██▀▎▐▛▉▓▓▜▛▔▊▁▁▐▘▗▍▞▌▞▒▅▜▁▊
 ----------------------------------------------------------------------------------------------------
 
 Coordinates
@@ -25,14 +63,13 @@ Presented by Folia.app
 
 contract Coordinates is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     bool public paused = false;
+    bool public forceOpen = false;
     uint256 public constant MAX_SUPPLY = 139;
-    uint256 public price = 0.024 ether; // TODO: change before mainnet
+    uint256 public price = 0.24 ether;
     address public metadata;
     address public splitter;
-    // uint256 public startdate = 1698822000; // Wed Nov 01 2023 07:00:00 GMT+0000 (8pm CEST Berlin, 7pm London, 2pm NYC, 11am LA)
-    // uint256 public premint = 1698735600; // Tue Oct 31 2023 07:00:00 GMT+0000 (8pm CEST Berlin, 4pm London, 11am NYC, 8am LA)
-    uint256 public startdate = block.timestamp; // TODO: remove before mainnet
-    uint256 public premint = block.timestamp; // TODO: remove before mainnet
+    uint256 public premint = 1698778800; // Tue Oct 31 2023 19:00:00 GMT+0000 (8pm CEST Berlin, 4pm London, 11am NYC, 8am LA)
+    uint256 public startdate = 1698865200; // Wed Nov 01 2023 19:00:00 GMT+0000 (8pm CEST Berlin, 7pm London, 2pm NYC, 11am LA)
     bytes32 public merkleRoot =
         0x7eb11619d1dd456844424b6c6f1be20ba3552298bb97a978724278ddebbd4474;
 
@@ -143,7 +180,10 @@ contract Coordinates is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     /// @param recipient the recipient of the Coordinates
     /// @param quantity the quantity of tokens to mint
     function mint(address recipient, uint256 quantity) public payable {
-        require(!paused && block.timestamp >= startdate, "PAUSED");
+        require(
+            (!paused && block.timestamp >= startdate) || forceOpen,
+            "PAUSED"
+        );
         internalMint(recipient, quantity);
     }
 
@@ -211,6 +251,12 @@ contract Coordinates is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     /// @param paused_ whether the contract is paused
     function setPause(bool paused_) public onlyOwner {
         paused = paused_;
+    }
+
+    /// @dev only the owner can set the forceOpen boolean
+    /// @param forceOpen_ whether the contract is forceOpen
+    function setForceOpen(bool forceOpen_) public onlyOwner {
+        forceOpen = forceOpen_;
     }
 
     /// @dev only the owner can set the startdate

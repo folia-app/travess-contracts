@@ -17,15 +17,15 @@ describe("Coordinates Tests", function () {
     const contractSplitterAddress = await coordinates.splitter()
     expect(contractSplitterAddress).to.equal(splitterAddress);
 
-    const startDate = await coordinates.startdate()
-    const actualStartDate = "Wed Nov 01 2023 07:00:00 GMT+0000"
-    const actualStartDateInUnixTime = Date.parse(actualStartDate) / 1000
-    expect(startDate).to.equal(actualStartDateInUnixTime)
-
     const premint = await coordinates.premint()
-    const actualPremint = "Tue Oct 31 2023 07:00:00 GMT+0000"
+    const actualPremint = "Tue Oct 31 2023 19:00:00 GMT+0000"
     const actualPremintInUnixTime = Date.parse(actualPremint) / 1000
     expect(premint).to.equal(actualPremintInUnixTime)
+
+    const startDate = await coordinates.startdate()
+    const actualStartDate = "Wed Nov 01 2023 19:00:00 GMT+0000"
+    const actualStartDateInUnixTime = Date.parse(actualStartDate) / 1000
+    expect(startDate).to.equal(actualStartDateInUnixTime)
 
   })
 
@@ -449,9 +449,9 @@ describe("Coordinates Tests", function () {
       { sortPairs: true },
     );
 
-    const daowRoot = await coordinates.merkleRoot()
+    const realRoot = await coordinates.merkleRoot()
     const treeRoot = "0x" + tree.getRoot().toString('hex')
-    expect(daowRoot).to.equal(treeRoot);
+    expect(realRoot).to.equal(treeRoot);
   })
 
   it("correctly mints using allowlist created for tests", async function () {

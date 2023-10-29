@@ -4,8 +4,8 @@ const hre = require("hardhat");
 const path = require("node:path");
 const fs = require("fs").promises;
 
-const correctPrice = ethers.utils.parseEther("0.024"); // TODO: change for mainnet
-const splitterAddress = '0x2F5866D7215416Fa60beDF532856736Cd9a76acf' // TODO: change for mainnet
+const correctPrice = ethers.utils.parseEther("0.24");
+const splitterAddress = '0x183e7D825423cA277E9F7E3763a2581cAa0E8378'
 const maxSupply = 139;
 
 const testJson = (tJson) => {
@@ -78,7 +78,7 @@ const deployContracts = async () => {
   const blocksToWaitBeforeVerify = 5;
 
   const [owner] = await hre.ethers.getSigners();
-  console.log({ deployer: owner.address })
+  // console.log({ deployer: owner.address })
 
   // deploy Metadata
   const Metadata = await hre.ethers.getContractFactory("Metadata");
