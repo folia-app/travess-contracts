@@ -7,7 +7,7 @@ const MetadataABI = require("./contractMetadata/ABI-sepolia-Metadata.json");
 const Metadata = require("./contractMetadata/homestead-Metadata.json");
 const MetadataSepolia = require("./contractMetadata/sepolia-Metadata.json");
 
-const { merkleAddresses } = require("./merkleAddresses.js");
+const merkleAddresses = require("./merkleAddresses.js");
 
 module.exports = {
   merkleAddresses,
