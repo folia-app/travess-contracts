@@ -441,8 +441,8 @@ describe("Coordinates Tests", function () {
     const [owner, addr1] = await ethers.getSigners();
     const { coordinates } = await deployContracts();
 
-    // last export of merkleAddresses was 2047
-    expect(merkleAddresses.length).to.equal(2047)
+    // last export of merkleAddresses was 2048
+    expect(merkleAddresses.length).to.equal(2048)
     const tree = new MerkleTree(
       merkleAddresses.map(ethers.utils.keccak256),
       ethers.utils.keccak256,

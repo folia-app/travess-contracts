@@ -71,7 +71,7 @@ contract Coordinates is ERC721AQueryable, Ownable, ERC2981, ReentrancyGuard {
     uint256 public premint = 1698778800; // Tue Oct 31 2023 19:00:00 GMT+0000 (8pm CEST Berlin, 4pm London, 11am NYC, 8am LA)
     uint256 public startdate = 1698865200; // Wed Nov 01 2023 19:00:00 GMT+0000 (8pm CEST Berlin, 7pm London, 2pm NYC, 11am LA)
     bytes32 public merkleRoot =
-        0x7eb11619d1dd456844424b6c6f1be20ba3552298bb97a978724278ddebbd4474;
+        0xe597b82084f35f97da50d5bd14f6faaf4e55f1c880be1e1bd9e3c0fcff677762;
 
     uint256 public constant MAX_PER_PREMINT = 2;
     mapping(address => uint256) public preminted;
